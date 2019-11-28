@@ -12,7 +12,7 @@ function App() {
     return (
       <div className="App">
         <Search
-          city="Krakow"
+          city="Guimarães,pt"
           description="Light intensity drizzle"
           minValue="5"
           currValue="10"

@@ -7,6 +7,8 @@ export default function Search(props) {
   let [temperatureMin, setTemperatureMin] = useState(null);
   let [temperatureMax, setTemperatureMax] = useState(null);
   let [description, setDescription] = useState(null);
+  let [city, setCity] = useState(null);
+  
 
   function showTemperature(response) {
     setTemperature(Math.round(response.data.main.temp));
@@ -17,24 +19,27 @@ export default function Search(props) {
   }
 
   function search(city) {
-    let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${props.city}
+    let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}
     &appid=8e7395d4f989412fff4eb060663c2eeb&units=metric`;
+
   
     axios.get(apiUrl).then(showTemperature);
   }
 
 
-  search("Guimarães,pt");
-
 
   function handleSubmit(event) {
     event.preventDefault();
-
-    let searchCity = document.querySelector("#search-city");
-    search(searchCity.value);
-
+    
+    search(city)
   }
-  
+
+  function updateCity(event){
+      setCity(event.target.value);
+  }
+
+
+  search("Guimarães,pt");
 
   function showFarehrenheit(event) {
     event.preventDefault();
@@ -60,6 +65,7 @@ export default function Search(props) {
               placeholder="Type a city..."
               className="form-control SearchCity"
               autoComplete="off"
+              onChange={updateCity}
             />
           </div>
           <div className="col">
@@ -72,7 +78,7 @@ export default function Search(props) {
         </div>
       </form>
       <br />
-      <h1>{props.city}</h1>
+      <h1>{city}</h1>
       <h2>{description}</h2>
       <div className="container">
         <div className="row text">
