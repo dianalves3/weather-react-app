@@ -1,0 +1,13 @@
+.SearchCity {
+    padding: 16px 24px;
+  }
+  
+  .BtnSearch {
+    color: white;
+    background-color: transparent;
+    padding: 16px 24px;
+    font-size: 16px;
+    line-height: 5px;
+    border-radius: 5px;
+  }
+  
