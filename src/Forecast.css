@@ -1,0 +1,16 @@
+.temp-pictures,
+.days {
+  text-align: center;
+}
+
+.weather-forecast {
+  font-size: small;
+  color: rgb(9, 25, 58);
+  text-align: center;
+}
+
+.week {
+  align-content: center;
+  align-items: center;
+  text-align: center;
+}

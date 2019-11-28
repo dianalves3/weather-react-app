@@ -1,17 +1,4 @@
-.SearchCity {
-    padding: 16px 24px;
-  }
-  
-  .BtnSearch {
-    color: white;
-    background-color: transparent;
-    padding: 16px 24px;
-    font-size: 16px;
-    line-height: 5px;
-    border-radius: 5px;
-  }
-  
-  li {
+li {
     list-style-type: none;
   }
   ul {
@@ -54,24 +41,5 @@
   .units {
     position: relative;
     top: -15px;
-  }
-  
-  h1 {
-    color: white;
-    font-size: 30px;
-    line-height: 29px;
-    margin: 0;
-    text-align: center;
-  }
-  
-  h2 {
-    color: white;
-    font-size: 20px;
-    text-align: center;
-    margin: 5px;
-  }
-  
-  h2::first-letter {
-    text-transform: capitalize;
   }
   
