@@ -15,23 +15,27 @@ export default function Search(props) {
     setTemperatureMin(Math.round(response.data.main.temp_min));
     setTemperatureMax(Math.round(response.data.main.temp_max));
     setDescription(response.data.weather[0].description);
+    setCity(response.data.name);
   
   }
 
-  function search(city) {
-    let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}
-    &appid=8e7395d4f989412fff4eb060663c2eeb&units=metric`;
-
-  
-    axios.get(apiUrl).then(showTemperature);
-  }
+  //function search(city) {
+   // let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}
+    //&appid=8e7395d4f989412fff4eb060663c2eeb&units=metric`;
+//    axios.get(apiUrl).then(showTemperature);
+  //}
 
 
 
   function handleSubmit(event) {
     event.preventDefault();
-    
-    search(city)
+
+    let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}
+    &appid=8e7395d4f989412fff4eb060663c2eeb&units=metric`;
+
+  
+    axios.get(apiUrl).then(showTemperature);
+
   }
 
   function updateCity(event){
@@ -39,7 +43,7 @@ export default function Search(props) {
   }
 
 
-  search("Guimarães,pt");
+
 
   function showFarehrenheit(event) {
     event.preventDefault();
