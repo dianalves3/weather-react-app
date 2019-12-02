@@ -9,7 +9,10 @@ export default function Search(props) {
   let [description, setDescription] = useState(null);
   let [city, setCity] = useState(null);
   let [iconDay,setIcon] =useState(null);
-  
+  let [clouds, setClouds] = useState(null);
+  let [hum, setHum] = useState(null);
+  let [speed, setSpeed] = useState(null);
+
 
   function showTemperature(response) {
     setTemperature(Math.round(response.data.main.temp));
@@ -17,33 +20,33 @@ export default function Search(props) {
     setTemperatureMax(Math.round(response.data.main.temp_max));
     setDescription(response.data.weather[0].description);
     setCity(response.data.name);
-
+    setClouds(response.data.clouds.all);
+    setHum(response.data.main.humidity);
+    setSpeed(response.data.wind.speed);
+    
     let iconURL=`http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`;
 
     setIcon(<img src={iconURL} alt="weather icon"/>)
-  
-  }
 
+    }
+
+ 
  function search(city) {
    
   //8e7395d4f989412fff4eb060663c2eeb
-
+  //49709f556ca5716e98602bbd4473e5d1
+  let apiKey="49709f556ca5716e98602bbd4473e5d1";  
   let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}
- &appid=49709f556ca5716e98602bbd4473e5d1&units=metric`;
+ &appid=${apiKey}&units=metric`;
     axios.get(apiUrl).then(showTemperature);
+
+  //apiUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${apiKey}&units=metric`;
+  //axios.get(apiUrl).then(displayForecast);
+
+ 
 }
 
-function onOpening () {
-
-  if (city===null){
-    return search(props.city);
-  } else {
-    return search(city)
-  }
-  }
-  
-  onOpening();
-
+search("Guimarães,pt");
 
 
   function handleSubmit(event) {
@@ -71,10 +74,26 @@ function onOpening () {
 
   function showCelsius(event) {
     event.preventDefault();
+    
     setTemperature(temperature);
     setTemperatureMin(temperatureMin);
     setTemperatureMax(temperatureMax);
   }
+
+
+  function showPosition(position) {
+    let lat = position.coords.latitude;
+    let lon = position.coords.longitude;
+    let gps = document.querySelector("#gps");
+    gps.innerHTML = `Latitude: ${Math.floor(lat * 1000 + 0.5) /
+      1000} Longitude:${Math.floor(lon * 1000 + 0.5) / 1000} `;
+    console.log(position.coords);
+  }
+  
+  function getCurrentPosition() {
+    navigator.geolocation.getCurrentPosition(showPosition);
+  }
+
 
   return (
     <div className="weatherApp">
@@ -143,6 +162,46 @@ function onOpening () {
           </div>
         </div>
       </div>
+      <div className="container">
+      <div className="row">
+        <div className="col-6 info">
+          <ul>
+            <li>
+              <p className="clouds">Cloudiness: {clouds}</p>
+            </li>
+            <li>
+              <p id="humidity">Humidity: {hum} </p>
+            </li>
+            <li>
+              <p className="wind">Wind: {speed} </p>
+            </li>
+          </ul>
+        </div>
+        <div className="col-6 info">
+          <ul>
+            <li>Current Time</li>
+            <li>
+              <p className="time"> {props.time} </p>
+            </li>
+            <li>
+              <p className="date"> {props.date} </p>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div className="container">
+      <div className="row">
+        <div className="col-6 gps">
+          <button type="button" className="btn btn-outline-dark" onClick={getCurrentPosition}>
+            GPS
+          </button>
+        </div>
+        <div className="col-6">
+          <p id="gps" />
+        </div>
+      </div>
+    </div>
     </div>
   );
 }
