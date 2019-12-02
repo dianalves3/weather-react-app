@@ -32,7 +32,7 @@ export default function Search(props) {
     axios.get(apiUrl).then(showTemperature);
 }
 
-function onOpening (){
+function onOpening () {
 
 if (city===null){
   return search(props.city);
@@ -43,7 +43,6 @@ if (city===null){
 
 onOpening();
 
-
   function handleSubmit(event) {
    event.preventDefault();
 
@@ -53,6 +52,11 @@ onOpening();
 
   
     //axios.get(apiUrl).then(showTemperature);
+    if (city===null){
+      return search(props.city);
+    } else {
+      return search(city)
+    }
 
   }
 
