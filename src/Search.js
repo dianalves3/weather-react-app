@@ -19,11 +19,10 @@ export default function Search(props) {
   
   }
 
-  //function search(city) {
-   // let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}
-    //&appid=8e7395d4f989412fff4eb060663c2eeb&units=metric`;
-//    axios.get(apiUrl).then(showTemperature);
-  //}
+//function search(city) {
+ //let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=8e7395d4f989412fff4eb060663c2eeb&units=metric`;
+   // axios.get(apiUrl).then(showTemperature);
+//}
 
 
 
@@ -39,8 +38,8 @@ export default function Search(props) {
   }
 
   function updateCity(event){
-      setCity(event.target.value);
-  }
+    setCity(event.target.value);
+ }
 
 
 
