@@ -8,6 +8,7 @@ export default function Search(props) {
   let [temperatureMax, setTemperatureMax] = useState(null);
   let [description, setDescription] = useState(null);
   let [city, setCity] = useState(null);
+  let [iconDay,setIcon] =useState(null);
   
 
   function showTemperature(response) {
@@ -16,30 +17,48 @@ export default function Search(props) {
     setTemperatureMax(Math.round(response.data.main.temp_max));
     setDescription(response.data.weather[0].description);
     setCity(response.data.name);
+
+    let iconURL=`http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`;
+
+    setIcon(<img src={iconURL} alt="weather icon"/>)
   
   }
 
-//function search(city) {
- //let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=8e7395d4f989412fff4eb060663c2eeb&units=metric`;
-   // axios.get(apiUrl).then(showTemperature);
-//}
+ function search(city) {
+   
 
+  let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}
+ &appid=8e7395d4f989412fff4eb060663c2eeb&units=metric`;
+    axios.get(apiUrl).then(showTemperature);
+}
+
+function onOpening (){
+
+if (city===null){
+  return search(props.city);
+} else {
+  return search(city)
+}
+}
+
+onOpening();
 
 
   function handleSubmit(event) {
-    event.preventDefault();
+   event.preventDefault();
 
-    let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}
-    &appid=8e7395d4f989412fff4eb060663c2eeb&units=metric`;
+   
+    //let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}
+    //&appid=8e7395d4f989412fff4eb060663c2eeb&units=metric`;
 
   
-    axios.get(apiUrl).then(showTemperature);
+    //axios.get(apiUrl).then(showTemperature);
 
   }
 
   function updateCity(event){
-    setCity(event.target.value);
- }
+      setCity(event.target.value);
+  }
 
 
 
@@ -96,11 +115,7 @@ export default function Search(props) {
             <ul>
               <br />
               <li>
-                <img
-                  src="https://ssl.gstatic.com/onebox/weather/48/partly_cloudy.png"
-                  alt="partly_cloudy"
-                  height="60"
-                />
+                {iconDay}
               </li>
               <li>
                 {" "}
