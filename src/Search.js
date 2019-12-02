@@ -56,6 +56,8 @@ search("Guimarães,pt");
     //&appid=8e7395d4f989412fff4eb060663c2eeb&units=metric`;
     //axios.get(apiUrl).then(showTemperature);
 
+
+
   }
 
   function updateCity(event){
