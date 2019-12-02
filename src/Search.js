@@ -26,37 +26,32 @@ export default function Search(props) {
 
  function search(city) {
    
+  //8e7395d4f989412fff4eb060663c2eeb
 
   let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}
- &appid=8e7395d4f989412fff4eb060663c2eeb&units=metric`;
+ &appid=49709f556ca5716e98602bbd4473e5d1&units=metric`;
     axios.get(apiUrl).then(showTemperature);
 }
 
 function onOpening () {
 
-if (city===null){
-  return search(props.city);
-} else {
-  return search(city)
-}
-}
+  if (city===null){
+    return search(props.city);
+  } else {
+    return search(city)
+  }
+  }
+  
+  onOpening();
 
-onOpening();
+
 
   function handleSubmit(event) {
    event.preventDefault();
 
-   
     //let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}
     //&appid=8e7395d4f989412fff4eb060663c2eeb&units=metric`;
-
-  
     //axios.get(apiUrl).then(showTemperature);
-    if (city===null){
-      return search(props.city);
-    } else {
-      return search(city)
-    }
 
   }
 
