@@ -46,7 +46,7 @@ export default function Search(props) {
  
 }
 
-search("Guimarães,pt");
+
 
 
   function handleSubmit(event) {
@@ -56,12 +56,13 @@ search("Guimarães,pt");
     //&appid=8e7395d4f989412fff4eb060663c2eeb&units=metric`;
     //axios.get(apiUrl).then(showTemperature);
 
-
+    search(city);
 
   }
 
   function updateCity(event){
       setCity(event.target.value);
+  
   }
 
 
@@ -72,6 +73,9 @@ search("Guimarães,pt");
     setTemperature(Math.round((temperature * 9) / 5 + 32));
     setTemperatureMin(Math.round((temperatureMin * 9) / 5 + 32));
     setTemperatureMax(Math.round((temperatureMax * 9) / 5 + 32));
+
+   // celsiusLink.classList.remove("active");
+   // fahrenheitLink.classList.add("active");
   }
 
   function showCelsius(event) {
@@ -96,7 +100,10 @@ search("Guimarães,pt");
     navigator.geolocation.getCurrentPosition(showPosition);
   }
 
+  
 
+  if(city===null)
+   { search(city)} else {
   return (
     <div className="weatherApp">
       <form onSubmit={handleSubmit} id="search-form" className="mb-3">
@@ -120,7 +127,7 @@ search("Guimarães,pt");
         </div>
       </form>
       <br />
-      <h1>{city}</h1>
+      <h1> {city}</h1>
       <h2>{description}</h2>
       <div className="container">
         <div className="row text">
@@ -205,5 +212,6 @@ search("Guimarães,pt");
       </div>
     </div>
     </div>
-  );
+  );}
+
 }
