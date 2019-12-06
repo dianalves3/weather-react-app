@@ -1,6 +1,7 @@
 import React, { useState } from "react";
-import "./Search.css";
+import  "./Search.css";
 import axios from "axios";
+
 
 export default function Search(props) {
   let [temperature, setTemperature] = useState(null);
@@ -102,8 +103,9 @@ export default function Search(props) {
 
   
 
-  if(city===null)
-   { search(city)} else {
+if (city===null)
+{search("Guimarães,pt")}
+else {
   return (
     <div className="weatherApp">
       <form onSubmit={handleSubmit} id="search-form" className="mb-3">

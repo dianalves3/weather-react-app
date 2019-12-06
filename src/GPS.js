@@ -6,7 +6,7 @@ export default function GPS(props) {
     <div className="container">
       <div className="row">
         <div className="col-6 gps">
-          <button type="button" className="btn btn-outline-dark">
+          <button type="button" className="btn btn-outline-dark" onClick>
             GPS
           </button>
         </div>
