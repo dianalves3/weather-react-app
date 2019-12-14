@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import  "./Search.css";
+import Time from "./CurrentTime";
 import axios from "axios";
 
 
@@ -88,6 +89,7 @@ export default function Search(props) {
   }
 
 
+
   function showPosition(position) {
     let lat = position.coords.latitude;
     let lon = position.coords.longitude;
@@ -102,9 +104,25 @@ export default function Search(props) {
   }
 
   
+  function formatHours(timestamp) {
+    let date = new Date(timestamp);
+    let hours = date.getHours();
+    if (hours < 10) {
+      hours = `0${hours}`;
+    }
+    let minutes = date.getMinutes();
+    if (minutes < 10) {
+      minutes = `0${minutes}`;
+    }
+  
+    return `${hours}:${minutes}`;
+  }
+  
+
+
 
 if (city===null)
-{search("Guimarães,pt")}
+{search("Guimarães,pt"); return false;} 
 else {
   return (
     <div className="weatherApp">
@@ -188,17 +206,7 @@ else {
             </li>
           </ul>
         </div>
-        <div className="col-6 info">
-          <ul>
-            <li>Current Time</li>
-            <li>
-              <p className="time"> {props.time} </p>
-            </li>
-            <li>
-              <p className="date"> {props.date} </p>
-            </li>
-          </ul>
-        </div>
+        < Time />
       </div>
     </div>
     <div className="container">
