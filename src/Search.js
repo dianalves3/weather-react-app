@@ -14,6 +14,13 @@ export default function Search(props) {
   let [clouds, setClouds] = useState(null);
   let [hum, setHum] = useState(null);
   let [speed, setSpeed] = useState(null);
+  let [date, setDate] = useState(null);
+  let [time, setTime] = useState(null);
+
+
+  setTime(` ${hours}:${Fullminutes()}`);
+
+  setDate(`${dayToday}, ${monthToday} ${dayNToday}, ${year}`);
 
 
   function showTemperature(response) {
@@ -58,7 +65,7 @@ export default function Search(props) {
     //&appid=8e7395d4f989412fff4eb060663c2eeb&units=metric`;
     //axios.get(apiUrl).then(showTemperature);
 
-    search(city);
+      search(city.value);
 
   }
 
@@ -82,13 +89,13 @@ export default function Search(props) {
 
   function showCelsius(event) {
     event.preventDefault();
-    
+
     setTemperature(temperature);
     setTemperatureMin(temperatureMin);
     setTemperatureMax(temperatureMax);
   }
 
-
+ 
 
   function showPosition(position) {
     let lat = position.coords.latitude;
@@ -104,19 +111,18 @@ export default function Search(props) {
   }
 
   
-  function formatHours(timestamp) {
-    let date = new Date(timestamp);
-    let hours = date.getHours();
-    if (hours < 10) {
-      hours = `0${hours}`;
-    }
-    let minutes = date.getMinutes();
-    if (minutes < 10) {
-      minutes = `0${minutes}`;
-    }
-  
-    return `${hours}:${minutes}`;
-  }
+  //function formatHours(timestamp) {
+    //let date = new Date(timestamp);
+    //let hours = date.getHours();
+    //if (hours < 10) {
+    //  hours = `0${hours}`;
+   // }
+    //let minutes = date.getMinutes();
+    //if (minutes < 10) {
+    //  minutes = `0${minutes}`;
+   // }
+  //  return `${hours}:${minutes}`;
+ // }
   
 
 
@@ -147,7 +153,7 @@ else {
         </div>
       </form>
       <br />
-      <h1> {city}</h1>
+      <h1> {city} </h1>
       <h2>{description}</h2>
       <div className="container">
         <div className="row text">
@@ -206,7 +212,6 @@ else {
             </li>
           </ul>
         </div>
-        < Time />
       </div>
     </div>
     <div className="container">
@@ -219,9 +224,13 @@ else {
         <div className="col-6">
           <p id="gps" />
         </div>
+        <Time time={time} date={date} />
       </div>
     </div>
+
     </div>
+
+
   );}
 
 }

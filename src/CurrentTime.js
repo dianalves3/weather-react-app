@@ -3,9 +3,6 @@ import "./DayTemperature.css";
 
 export default function Time(props){
 
-let [date, setDate] = useState(null);
-let [time, setTime] = useState(null);
-
 let now = new Date();
 let dayNToday = now.getDate();
 let days = [
@@ -36,7 +33,7 @@ let months = [
 ];
 let monthToday = months[now.getMonth()];
 
-setDate(`${dayToday}, ${monthToday} ${dayNToday}, ${year}`);
+
 
 let hours = now.getHours();
 
@@ -48,7 +45,7 @@ function Fullminutes() {
   }
 }
 
-setTime(` ${hours}:${Fullminutes()}`);
+
 
 
 
@@ -58,10 +55,10 @@ return(
           <ul>
             <li>Current Time</li>
             <li>
-              <p className="time"> {time} </p>
+              <p className="time"> {props.time} </p>
             </li>
             <li>
-              <p className="date"> {date} </p>
+              <p className="date"> {props.date} </p>
             </li>
           </ul>
         </div>
