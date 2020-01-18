@@ -16,11 +16,44 @@ export default function Search(props) {
   let [speed, setSpeed] = useState(null);
   let [date, setDate] = useState(null);
   let [time, setTime] = useState(null);
+  let now = new Date();
+
+  let dayNToday = now.getDate();
+let days = [
+  "Sunday",
+  "Monday",
+  "Tuesday",
+  "Wednesday",
+  "Thursday",
+  "Friday",
+  "Saturday"
+];
+let dayToday = days[now.getDay()];
+let year = now.getFullYear();
+
+let months = [
+  "January",
+  "February",
+  "March",
+  "April",
+  "May",
+  "June",
+  "July",
+  "August",
+  "September",
+  "October",
+  "November",
+  "December"
+];
+let monthToday = months[now.getMonth()];
 
 
-  setTime(` ${hours}:${Fullminutes()}`);
 
-  setDate(`${dayToday}, ${monthToday} ${dayNToday}, ${year}`);
+let hours = now.getHours();
+
+let minutes=now.getMinutes();
+
+
 
 
   function showTemperature(response) {
@@ -32,6 +65,10 @@ export default function Search(props) {
     setClouds(response.data.clouds.all);
     setHum(response.data.main.humidity);
     setSpeed(response.data.wind.speed);
+
+    setTime(` ${hours}:${minutes}`);
+
+    setDate(`${dayToday}, ${monthToday} ${dayNToday}, ${year}`);
     
     let iconURL=`http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`;
 
@@ -59,15 +96,18 @@ export default function Search(props) {
 
 
   function handleSubmit(event) {
-   event.preventDefault();
+   
+    event.preventDefault();
 
     //let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}
     //&appid=8e7395d4f989412fff4eb060663c2eeb&units=metric`;
     //axios.get(apiUrl).then(showTemperature);
-
-      search(city.value);
+    
+      search(city);
 
   }
+
+ 
 
   function updateCity(event){
       setCity(event.target.value);
@@ -89,6 +129,8 @@ export default function Search(props) {
 
   function showCelsius(event) {
     event.preventDefault();
+    
+    search(city);
 
     setTemperature(temperature);
     setTemperatureMin(temperatureMin);
@@ -212,6 +254,10 @@ else {
             </li>
           </ul>
         </div>
+        <div className="col-6 info">
+        <Time time={time} date={date} />
+        </div>
+
       </div>
     </div>
     <div className="container">
@@ -224,7 +270,7 @@ else {
         <div className="col-6">
           <p id="gps" />
         </div>
-        <Time time={time} date={date} />
+
       </div>
     </div>
 
